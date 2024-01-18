@@ -1,43 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Models\Post;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('home', function () {
-    return view('home');
-});
-
-Route::get('about', function () {
-    return view('about', [
-        "nama" => "bagas prabowo",
-        "alamat" => "Solo",
-        "photo" => "bagas.jpg"
-    ]);
-});
-
-Route::get('post', function () {
-    return view('post', [
-        "itemotivasi" => Post::all()
-    ]);
-});
-
-Route::get('post={slug}', function($slug){
-    $motivasi = [
+class Post
+{
+    private static $post_motivasi = [
         [
             "judul"=>"Motivasi 1",
             "slug"=>"motivasi-1",
@@ -49,15 +14,4 @@ Route::get('post={slug}', function($slug){
             "deskripsi"=>"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquam quos labore temporibus, vero, corrupti numquam eius libero impedit hic obcaecati nobis voluptates. Ab doloremque omnis soluta, repellat voluptates, unde amet voluptatem nihil aspernatur delectus commodi blanditiis voluptate totam harum fuga, possimus nostrum molestias suscipit voluptatibus dolorem? Maxime consequatur ullam aut accusantium. Ad laudantium et fugit id obcaecati harum quia ex cumque eos aperiam corrupti nostrum mollitia aspernatur minima neque, quaerat aliquam temporibus expedita quibusdam dicta ipsum incidunt! Tempore natus unde nam provident, qui fugit pariatur dolorem. Eius, nulla! Sequi perferendis quod ab dolore cum? A velit porro dolore voluptates ut."
         ]
     ];
-
-    $new_motivasi = [];
-    foreach($motivasi as $itemotivasi){
-        if($itemotivasi['slug'] === $slug){
-            $new_motivasi=$itemotivasi;
-        }
-    }
-
-    return view('postt', [
-        "motivation" => $new_motivasi
-    ]);
-});
+}
