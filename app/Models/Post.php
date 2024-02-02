@@ -1,4 +1,5 @@
 <?php
+namespace App\Models;
 
 class Post
 {
@@ -14,4 +15,35 @@ class Post
             "deskripsi"=>"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquam quos labore temporibus, vero, corrupti numquam eius libero impedit hic obcaecati nobis voluptates. Ab doloremque omnis soluta, repellat voluptates, unde amet voluptatem nihil aspernatur delectus commodi blanditiis voluptate totam harum fuga, possimus nostrum molestias suscipit voluptatibus dolorem? Maxime consequatur ullam aut accusantium. Ad laudantium et fugit id obcaecati harum quia ex cumque eos aperiam corrupti nostrum mollitia aspernatur minima neque, quaerat aliquam temporibus expedita quibusdam dicta ipsum incidunt! Tempore natus unde nam provident, qui fugit pariatur dolorem. Eius, nulla! Sequi perferendis quod ab dolore cum? A velit porro dolore voluptates ut."
         ]
     ];
+
+//tanpa collection
+
+    // public static function all(){
+    //     return self::$post_motivasi;
+    // }
+
+    // public static function find($slug){
+
+    //     $motivasi = self::$post_motivasi;
+    //     $new_motivasi = [];
+    //     foreach($motivasi as $itemotivasi){
+    //         if($itemotivasi['slug'] === $slug){
+    //             $new_motivasi=$itemotivasi;
+    //         }
+    //     }
+    //         return $new_motivasi;
+    // }
+
+
+//dengan collection
+
+    public static function all(){
+        return collect(self::$post_motivasi);
+    }
+
+    public static function find($slug){
+
+        $motivasi = static::all();
+        return $motivasi->firstWhere('slug', $slug);
+    }
 }
