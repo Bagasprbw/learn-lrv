@@ -8,13 +8,13 @@
         <ul class="navbar-nav ml-auto">
           <!-- Add your navbar items here -->
           <li class="nav-item">
-            <a class="nav-link active" href="home">Home</a>
+            <a class="nav-link active" href="/home">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="about">About</a>
+            <a class="nav-link" href="/about">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="post">Post</a>
+            <a class="nav-link" href="/post">Post</a>
           </li>
         </ul>
       </div>

@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\PostController;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,14 +18,14 @@ use App\Models\Post;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('home', function () {
     return view('home');
 });
 
-Route::get('about', function () {
+Route::get('/home', function () {
+    return view('home');
+});
+
+Route::get('/about', function () {
     return view('about', [
         "nama" => "bagas prabowo",
         "alamat" => "Solo",
@@ -30,14 +33,27 @@ Route::get('about', function () {
     ]);
 });
 
-Route::get('post', function () {
-    return view('post', [
-        "itemotivasi" => Post::all()
+Route::get('/post', [PostController::class, 'index']);
+Route::get('/post/{post:slug}', [PostController::class, 'show']);
+
+Route::get('/categories', function() {
+    return view('categories', [ 
+        'judul' => "All Category",
+        'categories' => Category::all()
     ]);
 });
 
-Route::get('post={slug}', function($slug){
-    return view('postt', [
-        "motivation" => Post::find($slug)
+Route::get('/categories/{category:slug}',function(Category $category){
+    return view('post', [
+        'judul' => "Post By Category : $category->name",
+        'posts' => $category->posts
+        // 'posts' => $category->posts->load('author','category')
     ]);
 });
+
+// Route::get('/authors/{author:username}',function(User $author){
+//     return view('post', [
+//         'posts' => $author->posts
+//     ]);
+// });
+Route::get('/authors/{author:username}', [PostController::class, 'authorsPost']);
